@@ -1,32 +1,73 @@
-import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import React, { useState } from 'react';
 
-import EditScreenInfo from '../components/EditScreenInfo';
-import { Text, View } from '../components/Themed';
+
+import {
+  Modal,
+  Button,
+  View,
+  Text,
+  SafeAreaView,
+  StyleSheet,
+} from 'react-native';
+
+
 
 export default function TabTwoScreen() {
+  const [showModal, setShowModal] = useState(false);
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Tab Two</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="/screens/TabTwoScreen.tsx" />
-    </View>
+    <SafeAreaView style={{ flex: 1 }}>
+      <View style={styles.container}>
+        <Modal
+          animationType={'slide'}
+          transparent={false}
+          visible={showModal}
+          onRequestClose={() => {
+            console.log('Modal has been closed.');
+          }}>
+          {/*All views of Modal*/}
+          {/*Animation can be slide, slide, none*/}
+          <View style={styles.modal}>
+            <Text style={styles.text}>Modal is open!</Text>
+            <Button
+              title="Click To Close Modal"
+              onPress={() => {
+                setShowModal(!showModal);
+              }}
+            />
+          </View>
+        </Modal>
+        {/*Button will change state to true and view will re-render*/}
+        <Button
+          title="Click To Open Modal"
+          onPress={() => {
+            setShowModal(!showModal);
+          }}
+        />
+      </View>
+    </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#ecf0f1',
+    marginTop: 30,    
   },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
+  background: {
+    
   },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
+  modal: {
+    flex: 1,
+    alignItems: 'center',
+    backgroundColor: '#00ff00',
+    padding: 100,
+  },
+  text: {
+    color: '#3f2949',
+    marginTop: 10,
   },
 });

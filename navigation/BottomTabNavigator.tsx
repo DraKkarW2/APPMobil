@@ -2,12 +2,13 @@ import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
+import { Button } from 'react-native';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import TabOneScreen from '../screens/TabOneScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
-import { BottomTabParamList, TabOneParamList, TabTwoParamList } from '../types';
+import { BottomTabParamList, TabOneParamList, TabTwoParamList,ParametreParamList} from '../types';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -15,9 +16,10 @@ export default function BottomTabNavigator() {
   const colorScheme = useColorScheme();
 
   return (
-    <BottomTab.Navigator
+    <BottomTab.Navigator 
       initialRouteName="TabOne"
-      tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}>
+      tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}
+      >
       <BottomTab.Screen
         name="TabOne"
         component={TabOneNavigator}
@@ -46,13 +48,23 @@ function TabBarIcon(props: { name: React.ComponentProps<typeof Ionicons>['name']
 // https://reactnavigation.org/docs/tab-based-navigation#a-stack-navigator-for-each-tab
 const TabOneStack = createStackNavigator<TabOneParamList>();
 
+
+    
 function TabOneNavigator() {
   return (
-    <TabOneStack.Navigator>
+    <TabOneStack.Navigator >
       <TabOneStack.Screen
         name="TabOneScreen"
         component={TabOneScreen}
-        options={{ headerTitle: 'Tab One Title' }}
+        
+        options={({navigation})=>({ headerTitle: 'Accueil',  headerRight: () => (
+          <Button
+            onPress={() => navigation.navigate('ParametresScreen')}
+            title="Parameters"
+            color="#000000"
+          />
+        ), })}
+        
       />
     </TabOneStack.Navigator>
   );
@@ -62,7 +74,7 @@ const TabTwoStack = createStackNavigator<TabTwoParamList>();
 
 function TabTwoNavigator() {
   return (
-    <TabTwoStack.Navigator>
+    <TabTwoStack.Navigator screenOptions={{gestureEnabled : true,gestureDirection:"horizontal"}} >
       <TabTwoStack.Screen
         name="TabTwoScreen"
         component={TabTwoScreen}
@@ -71,3 +83,9 @@ function TabTwoNavigator() {
     </TabTwoStack.Navigator>
   );
 }
+
+
+
+
+
+
