@@ -60,7 +60,7 @@ function TabOneNavigator() {
         options={({navigation})=>({ headerTitle: 'Accueil',  headerRight: () => (
           <Button
             onPress={() => navigation.navigate('ParametresScreen')}
-            title="Parameter"
+            title="Parameters"
             color="#000000"
           />
         ), })}
