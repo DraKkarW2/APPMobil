@@ -14,6 +14,7 @@ export default {
     background: whiteBackground,
     tint: tintColorLight,
     tabIconDefault: '#000',
+    gold:gold,
     tabIconSelected: tintColorLight,
     backgroundRounded: white
   },
@@ -21,6 +22,7 @@ export default {
     text: white,
     background: black,
     tint: tintColorDark,
+    gold:gold,
     tabIconDefault: '#ccc',
     tabIconSelected: tintColorDark,
     backgroundRounded: blackBackground
